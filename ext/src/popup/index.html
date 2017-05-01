@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<div id="content">
+    <h2>Linkjes</h2>
+</div>
+
+<script src="popup.js"></script>
+
+<style type="text/css">
+    body {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 13px;
+        line-height: 1.58;
+        margin: 0 8px
+    }
+
+    section {
+        width: 300px;
+    }
+
+    article.comment {
+        border-bottom: 1px dotted #dadada;
+        padding-bottom: 5px;
+        margin: 0 0 5px 0;
+        font-size: 1em;
+        word-wrap: break-word
+    }
+
+    article.comment p {
+        margin: 0
+    }
+
+    article.comment footer {
+        color: #8f8f8f
+    }
+
+    article.comment footer a {
+        cursor: pointer
+    }
+
+    article.comment footer a.mod {
+        color: #285011
+    }
+
+    article.comment footer .reportcount {
+        color: red;
+        font-weight: 700
+    }
+
+    article.comment.topcomment {
+        background: rgba(102, 194, 33, .3);
+        position: relative;
+        padding: 0 10px;
+        margin-top: 15px
+    }
+
+    article.comment.topcomment > * {
+        z-index: 10;
+        position: relative
+    }
+
+    article.comment.topcomment footer:after {
+        content: "topreaguursel";
+        position: absolute;
+        bottom: 20px;
+        right: 0;
+        opacity: .3;
+        -moz-transform: rotate(-15deg);
+        -o-transform: rotate(-15deg);
+        -webkit-transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+        transform: rotate(-15deg);
+        z-index: 5;
+        color: #000;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: "Courier New", Courier, monospace;
+        text-transform: small-caps
+    }
+
+    a {
+        color: #56af24;
+        text-decoration: none
+    }
+</style>
