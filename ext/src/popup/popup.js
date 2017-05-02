@@ -1,6 +1,6 @@
 chrome.runtime.sendMessage({type: "GetComments"});
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (message) {
     var comments = document.createElement('section');
     var html = message.html;
 
@@ -8,5 +8,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         ? html
         : 'Geen linkjes gevonden';
 
+    document.getElementById('loader').style.display = 'none';
     document.getElementById('content').appendChild(comments);
 });
