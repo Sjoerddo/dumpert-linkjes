@@ -1,6 +1,6 @@
 <?php
 
-// te bereiken op: https://i321720.iris.fhict.nl/php/d.php?target=
+// te bereiken op: https://i321720.iris.fhict.nl/php/linkjes_scrape.php?target=
 header("Access-Control-Allow-Origin: *");
 
 include 'simple_html_dom.php';
