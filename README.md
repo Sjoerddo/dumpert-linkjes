@@ -1,5 +1,4 @@
-# dumpert-linkjes   ![alt text](https://raw.githubusercontent.com/Sjoerddo/dumpert-linkjes/master/ext/icons/icon48.png)
- ---
+# dumpert-linkjes ![alt text](https://raw.githubusercontent.com/Sjoerddo/dumpert-linkjes/master/ext/icons/icon48.png)
  
 ![alt text](https://raw.githubusercontent.com/Sjoerddo/dumpert-linkjes/master/chrome_extension.png)
 
