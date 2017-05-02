@@ -1,5 +1,11 @@
-chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.type === "GetComments") {
+chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
+    if (tab.url.indexOf('dumpert.nl/mediabase') > -1) {
+        chrome.pageAction.show(tabId);
+    }
+});
+
+chrome.extension.onMessage.addListener(function (request) {
+    if (request.type === 'GetComments') {
         chrome.tabs.query({active: true}, function (tabs) {
             var url = 'https://i321720.iris.fhict.nl/php/linkjes_scrape.php?target=' + tabs[0].url;
 

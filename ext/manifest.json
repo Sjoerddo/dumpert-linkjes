@@ -14,7 +14,7 @@
     ],
     "persistent": true
   },
-  "browser_action": {
+  "page_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "Linkjes",
     "default_popup": "src/popup/index.html"
