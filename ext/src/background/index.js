@@ -6,7 +6,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
 
 chrome.extension.onMessage.addListener(function (request) {
     if (request.type === 'GetComments') {
-        chrome.tabs.query({active: true}, function (tabs) {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
             var url = 'https://i321720.iris.fhict.nl/php/linkjes_scrape.php?target=' + tabs[0].url;
 
             fetchHtml(url).then(function (html) {

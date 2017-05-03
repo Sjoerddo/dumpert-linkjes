@@ -1,4 +1,4 @@
-chrome.runtime.sendMessage({type: "GetComments"});
+chrome.runtime.sendMessage({type: 'GetComments'});
 
 chrome.runtime.onMessage.addListener(function (message) {
     var comments = document.createElement('section');
