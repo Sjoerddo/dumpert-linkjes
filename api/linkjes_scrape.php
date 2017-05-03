@@ -5,7 +5,7 @@ header("Access-Control-Allow-Origin: *");
 
 include 'get_html.php';
 
-$html = get_html(transform($_GET['target']));
+$html = get_html(transform_url($_GET['target']));
 
 foreach ($html->find('article.comment') as $comment) {
     $kudos = $comment->getAttribute('data-kudos');
@@ -19,9 +19,8 @@ foreach ($html->find('article.comment') as $comment) {
     }
 }
 
-function transform($url)
+function transform_url($url)
 {
     $split = explode('/', $url);
-
     return 'https://comments.dumpert.nl/embed/' . $split[4] . '/' . $split[5] . '/comments/';
 }
