@@ -3,16 +3,15 @@
 // te bereiken op: https://i321720.iris.fhict.nl/php/linkjes_scrape.php?target=
 header("Access-Control-Allow-Origin: *");
 
-include 'simple_html_dom.php';
+include 'get_html.php';
 
-$url = transform($_GET['target']);
-$html = file_get_html($url);
+$html = get_html(transform($_GET['target']));
 
 foreach ($html->find('article.comment') as $comment) {
     $kudos = $comment->getAttribute('data-kudos');
 
     // alleen positieve comments
-    if (intval($kudos) > 0) {
+    if (intval($kudos) >= 0) {
         // comments met linkje
         if ($comment->find('a', 0)->innertext !== '+') {
             echo $comment;
