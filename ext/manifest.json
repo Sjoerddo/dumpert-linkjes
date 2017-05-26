@@ -13,6 +13,16 @@
     ],
     "persistent": true
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.dumpert.nl/mediabase/*"
+      ],
+      "js": [
+        "src/content/script.js"
+      ]
+    }
+  ],
   "page_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "Linkjes",

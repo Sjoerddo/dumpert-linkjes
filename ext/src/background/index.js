@@ -11,8 +11,8 @@ chrome.extension.onMessage.addListener(function (request) {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             var tabUrl = tabs[0].url;
             var key = getSessionKey(tabUrl);
-
             var stored = sessionStorage.getItem(key);
+
             if (stored) {
                 chrome.runtime.sendMessage({ html: stored });
             } else {
@@ -22,9 +22,15 @@ chrome.extension.onMessage.addListener(function (request) {
                     html = html
                         ? sortHtmlByKudos(html)
                         : NO_LINKS_FOUND;
-                    
-                    sessionStorage.setItem(key, html);
-                    chrome.runtime.sendMessage({ html: html });
+
+                    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                        chrome.tabs.sendMessage(tabs[0].id, { type: 'valid_date' }, function (response) {
+                            if (response.valid) {
+                                sessionStorage.setItem(key, html);
+                            }
+                            chrome.runtime.sendMessage({ html: html });
+                        });
+                    });
                 });
             }
         });
