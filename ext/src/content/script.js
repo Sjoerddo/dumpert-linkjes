@@ -1,4 +1,4 @@
-var MONTHS = {
+const MONTHS = {
     januari: '01',
     februari: '02',
     maart: '03',
@@ -13,23 +13,23 @@ var MONTHS = {
     december: '12'
 };
 
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'valid_date') {
         sendResponse({ valid: isDateToCache() });
     }
 });
 
-function isDateToCache() {
-    var posted = getDumpPubDate();
+function isDateToCache () {
+    const posted = getDumpPubDate();
 
-    var now = new Date();
+    const now = new Date();
     now.setDate(now.getDate() - 1);
 
     return posted <= now;
 }
 
-function getDumpPubDate() {
-    var dumpPub = document.querySelector('.dump-pub').innerHTML.split(' ');
+function getDumpPubDate () {
+    const [d, m, y] = document.querySelector('.dump-pub').innerHTML.split(' ');
 
-    return new Date(dumpPub[2] + '-' + MONTHS[dumpPub[1]] + '-' + dumpPub[0]);
+    return new Date(`${y}-${MONTHS[m]}-${d}`);
 }

@@ -1,35 +1,32 @@
-chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
+chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
     if (tab.url.indexOf('dumpert.nl/mediabase') > -1) {
         chrome.pageAction.show(tabId);
     }
 });
 
-var NO_LINKS_FOUND = 'Geen linkjes gevonden';
+const NO_LINKS_FOUND = 'Geen linkjes gevonden'
 
-chrome.extension.onMessage.addListener(function (request) {
+chrome.extension.onMessage.addListener((request) => {
     if (request.type === 'GetComments') {
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            var tabUrl = tabs[0].url;
-            var key = getSessionKey(tabUrl);
-            var stored = sessionStorage.getItem(key);
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            const { id, url } = tabs[0];
+            const key = getSessionKey(url);
+            const stored = sessionStorage.getItem(key);
 
             if (stored) {
                 chrome.runtime.sendMessage({ html: stored });
             } else {
-                var apiUrl = 'https://i321720.iris.fhict.nl/php/linkjes_scrape.php?target=' + tabUrl;
-
-                fetchHtml(apiUrl).then(function (html) {
+                const apiUrl = 'https://i321720.iris.fhict.nl/php/linkjes_scrape.php?target=' + url;
+                fetchHtml(apiUrl).then((html) => {
                     html = html
                         ? sortHtmlByKudos(html)
                         : NO_LINKS_FOUND;
 
-                    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                        chrome.tabs.sendMessage(tabs[0].id, { type: 'valid_date' }, function (response) {
-                            if (response.valid) {
-                                sessionStorage.setItem(key, html);
-                            }
-                            chrome.runtime.sendMessage({ html: html });
-                        });
+                    chrome.tabs.sendMessage(id, { type: 'valid_date' }, (response) => {
+                        if (response.valid) {
+                            sessionStorage.setItem(key, html);
+                        }
+                        chrome.runtime.sendMessage({ html });
                     });
                 });
             }
@@ -37,24 +34,20 @@ chrome.extension.onMessage.addListener(function (request) {
     }
 });
 
-function fetchHtml(url) {
-    return fetch(url).then(function (response) {
-        return response.text();
-    });
+function fetchHtml (url) {
+    return fetch(url).then(response => response.text());
 }
 
-function sortHtmlByKudos(html) {
-    var section = document.createElement('section');
+function sortHtmlByKudos (html) {
+    const section = document.createElement('section');
     section.innerHTML = html;
 
-    return Array.from(section.querySelectorAll('article')).sort(function (a, b) {
-        return b.getAttribute('data-kudos') - a.getAttribute('data-kudos');
-    }).map(function (article) {
-        return article.outerHTML;
-    });
+    return Array.from(section.querySelectorAll('article'))
+        .sort((a, b) => b.getAttribute('data-kudos') - a.getAttribute('data-kudos'))
+        .map((article) => article.outerHTML);
 }
 
-function getSessionKey(url) {
-    var split = url.split('/');
+function getSessionKey (url) {
+    const split = url.split('/');
     return split[4] + split[5];
 }
