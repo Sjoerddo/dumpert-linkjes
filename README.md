@@ -1,6 +1,4 @@
-# dumpert-linkjes ![alt text](https://raw.githubusercontent.com/Sjoerddo/dumpert-linkjes/master/ext/icons/icon48.png)
- 
-![alt text](https://raw.githubusercontent.com/Sjoerddo/dumpert-linkjes/master/chrome_extension.png)
+# dumpert-linkjes
 
 1. Laadt de /ext folder in
 
