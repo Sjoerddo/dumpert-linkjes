@@ -42,7 +42,7 @@ function sortHtmlByKudos (html) {
     const section = document.createElement('section');
     section.innerHTML = html;
 
-    return Array.from(section.querySelectorAll('article'))
+    return [...section.querySelectorAll('article')]
         .sort((a, b) => b.getAttribute('data-kudos') - a.getAttribute('data-kudos'))
         .map((article) => article.outerHTML);
 }
