@@ -1,7 +1,9 @@
 # dumpert-linkjes
 
-1. Laad de /ext folder in
+1. Ga naar chrome://extensions/
 
-2. Ga naar een filmpje
+2. Uitgepakte extensie laden...
 
-3. Klik op het icoontje rechtsboven
+3. Ga naar een filmpje
+
+4. Klik op het icoontje rechtsboven
