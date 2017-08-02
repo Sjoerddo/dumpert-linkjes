@@ -15,20 +15,18 @@ const MONTHS = {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'valid_date') {
-        sendResponse({ valid: isDateToCache() });
+        sendResponse({ valid: isDateToCache(getCurrentDumpDate()) });
     }
 });
 
-function isDateToCache () {
-    const posted = getDumpPubDate();
-
+function isDateToCache(date) {
     const now = new Date();
     now.setDate(now.getDate() - 1);
 
-    return posted <= now;
+    return date <= now;
 }
 
-function getDumpPubDate () {
+function getCurrentDumpDate() {
     const [d, m, y] = document.querySelector('.dump-pub').innerHTML.split(' ');
 
     return new Date(`${y}-${MONTHS[m]}-${d}`);
